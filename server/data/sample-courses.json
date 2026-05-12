@@ -1,0 +1,155 @@
+{
+  "quarter": "AUT2026",
+  "generatedAt": "2026-05-12T00:00:00.000Z",
+  "source": "sample fixture for development before live scrape is wired in",
+  "courses": [
+    {
+      "code": "CSE 142",
+      "title": "Computer Programming I",
+      "sections": [
+        {
+          "sln": "12345",
+          "sectionId": "A",
+          "credits": "4",
+          "days": ["M", "W", "F"],
+          "startTime": "09:30",
+          "endTime": "10:20",
+          "building": "KNE",
+          "room": "210",
+          "instructor": "REGES, S",
+          "status": "Open",
+          "enrolled": 280,
+          "capacity": 300
+        },
+        {
+          "sln": "12346",
+          "sectionId": "B",
+          "credits": "4",
+          "days": ["M", "W", "F"],
+          "startTime": "11:30",
+          "endTime": "12:20",
+          "building": "KNE",
+          "room": "210",
+          "instructor": "STEPP, M",
+          "status": "Open",
+          "enrolled": 260,
+          "capacity": 300
+        }
+      ]
+    },
+    {
+      "code": "CSE 143",
+      "title": "Computer Programming II",
+      "sections": [
+        {
+          "sln": "12400",
+          "sectionId": "A",
+          "credits": "5",
+          "days": ["M", "W", "F"],
+          "startTime": "13:30",
+          "endTime": "14:20",
+          "building": "KNE",
+          "room": "120",
+          "instructor": "MARTIN, B",
+          "status": "Open",
+          "enrolled": 220,
+          "capacity": 250
+        }
+      ]
+    },
+    {
+      "code": "MATH 124",
+      "title": "Calculus With Analytic Geometry I",
+      "sections": [
+        {
+          "sln": "17800",
+          "sectionId": "A",
+          "credits": "5",
+          "days": ["M", "T", "W", "Th", "F"],
+          "startTime": "08:30",
+          "endTime": "09:20",
+          "building": "SMI",
+          "room": "120",
+          "instructor": "LIU, X",
+          "status": "Open",
+          "enrolled": 195,
+          "capacity": 200
+        },
+        {
+          "sln": "17801",
+          "sectionId": "B",
+          "credits": "5",
+          "days": ["M", "T", "W", "Th", "F"],
+          "startTime": "12:30",
+          "endTime": "13:20",
+          "building": "SMI",
+          "room": "120",
+          "instructor": "PATEL, R",
+          "status": "Open",
+          "enrolled": 180,
+          "capacity": 200
+        }
+      ]
+    },
+    {
+      "code": "ENGL 131",
+      "title": "Composition: Exposition",
+      "sections": [
+        {
+          "sln": "14200",
+          "sectionId": "A",
+          "credits": "5",
+          "days": ["T", "Th"],
+          "startTime": "10:30",
+          "endTime": "12:20",
+          "building": "MGH",
+          "room": "234",
+          "instructor": "JOHNSON, K",
+          "status": "Open",
+          "enrolled": 24,
+          "capacity": 25
+        }
+      ]
+    },
+    {
+      "code": "PSYCH 101",
+      "title": "Introduction to Psychology",
+      "sections": [
+        {
+          "sln": "18900",
+          "sectionId": "A",
+          "credits": "5",
+          "days": ["M", "W", "F"],
+          "startTime": "14:30",
+          "endTime": "15:20",
+          "building": "KNE",
+          "room": "130",
+          "instructor": "ANDERSON, P",
+          "status": "Open",
+          "enrolled": 380,
+          "capacity": 400
+        }
+      ]
+    },
+    {
+      "code": "INFO 200",
+      "title": "Intellectual Foundations of Informatics",
+      "sections": [
+        {
+          "sln": "15600",
+          "sectionId": "A",
+          "credits": "5",
+          "days": ["T", "Th"],
+          "startTime": "13:30",
+          "endTime": "15:20",
+          "building": "MGH",
+          "room": "295",
+          "instructor": "CHEN, Y",
+          "status": "Open",
+          "enrolled": 110,
+          "capacity": 120
+        }
+      ]
+    }
+  ]
+}
