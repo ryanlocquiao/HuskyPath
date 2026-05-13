@@ -1,0 +1,249 @@
+/* ── Root ───────────────────────────────────────────────────── */
+.ci-root {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  animation: fadeInUp 0.45s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero text ──────────────────────────────────────────────── */
+.ci-hero {
+  text-align: center;
+}
+
+.ci-headline {
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: var(--text-h);
+  margin: 0 0 16px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: normal;
+}
+
+.ci-headline em {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.ci-sub {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  max-width: 520px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+}
+
+/* ── Input card ─────────────────────────────────────────────── */
+.ci-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 20px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ci-card--focused {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.ci-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 10px;
+  font-family: system-ui, sans-serif;
+}
+
+.ci-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--text-h);
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  box-sizing: border-box;
+  caret-color: var(--accent);
+}
+
+.ci-textarea::placeholder {
+  color: var(--text);
+  opacity: 0.5;
+}
+
+.ci-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.ci-char-count {
+  font-size: 12px;
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  opacity: 0.6;
+}
+
+.ci-char-count--warn {
+  color: #e07040;
+  opacity: 1;
+}
+
+.ci-hint {
+  font-size: 12px;
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  opacity: 0.45;
+  flex: 1;
+  text-align: right;
+}
+
+.ci-submit {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  font-family: system-ui, sans-serif;
+  font-weight: 500;
+  cursor: not-allowed;
+  transition: all 0.18s;
+  flex-shrink: 0;
+}
+
+.ci-submit--ready {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.ci-submit--ready:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-bg);
+}
+
+.ci-submit--ready:active {
+  transform: translateY(0);
+}
+
+/* ── Suggestions ─────────────────────────────────────────────── */
+.ci-suggestions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ci-suggestions-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.6;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.ci-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ci-chip {
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.ci-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.ci-chip--active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* ── How it works ────────────────────────────────────────────── */
+.ci-how {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ci-how-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ci-how-icon {
+  font-size: 20px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.ci-how-card strong {
+  font-size: 14px;
+  color: var(--text-h);
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.ci-how-card p {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .ci-root { padding: 32px 16px 60px; }
+  .ci-how { grid-template-columns: 1fr; }
+  .ci-hint { display: none; }
+}
