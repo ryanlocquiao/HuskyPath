@@ -34,17 +34,33 @@
 }
 
 .brand-mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  display: grid;
-  place-items: center;
-  font-family: 'Georgia', serif;
-  letter-spacing: -0.5px;
+  /* keep layout stable when logo is an image or text */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* when the logo is an <img class="brand-mark"> */
+img.brand-mark {
+  height: 40px;
+  width: auto;
+  max-width: 160px;
+  display: block;
+  object-fit: contain;
+}
+
+/* when the logo is an image inside a wrapper (.brand-mark > img) */
+.brand-mark > img {
+  height: 40px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .brand-name {

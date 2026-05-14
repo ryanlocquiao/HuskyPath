@@ -54,7 +54,7 @@ function App() {
       <header className="app-header">
         <div className="header-inner">
           <div className="brand">
-            <span className="brand-mark">H</span>
+            <img src="/uw_husky_logo.png" className="brand-mark" alt="HuskyPath logo" />
             <span className="brand-name">HuskyPath</span>
           </div>
           <p className="brand-tagline">AI-powered schedule planner for UW students</p>
