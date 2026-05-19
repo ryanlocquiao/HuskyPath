@@ -23,6 +23,8 @@
  * Constraints honored as HARD filters (cause pruning):
  *   - no_before:        "HH:MM"   reject sections starting before this
  *   - no_after:         "HH:MM"   reject sections ending after this
+ *   - excluded_days:    string[]  reject any section meeting on these days
+ *                                 (accepts "F" / "Th" or "Friday" / "Thursday")
  *   - excluded_courses: string[]  drop these course codes entirely
  *   - required_courses: string[]  if a required course has no eligible
  *                                 sections, return [] (caller decides
@@ -59,6 +61,23 @@ function sectionsConflict(a, b) {
   return aStart < bEnd && bStart < aEnd;
 }
 
+// Accept either short codes ("F", "Th") or full names ("Friday") from
+// the NLP parser. Map names to codes for uniform comparison.
+const DAY_NAME_TO_CODE = {
+  monday: 'M', tuesday: 'T', wednesday: 'W', thursday: 'Th', friday: 'F',
+  saturday: 'S', sunday: 'U',
+};
+
+function normalizeDayList(list) {
+  if (!Array.isArray(list)) return new Set();
+  return new Set(
+    list
+      .map((d) => (typeof d === 'string' ? d.trim() : ''))
+      .map((d) => DAY_NAME_TO_CODE[d.toLowerCase()] || d)
+      .filter(Boolean)
+  );
+}
+
 /**
  * Hard-filter a course's sections by the constraint object before
  * we ever consider them in the search. Returns the filtered list.
@@ -70,10 +89,12 @@ function eligibleSections(course, constraints = {}) {
   const noAfter = constraints.no_after
     ? timeToMinutes(constraints.no_after)
     : null;
+  const excludedDays = normalizeDayList(constraints.excluded_days);
 
   return course.sections.filter((s) => {
     if (noBefore != null && timeToMinutes(s.startTime) < noBefore) return false;
     if (noAfter != null && timeToMinutes(s.endTime) > noAfter) return false;
+    if (excludedDays.size && s.days.some((d) => excludedDays.has(d))) return false;
     // Closed sections are still candidates — UW students often plan
     // around waitlists — but we tag them so the scorer can penalize.
     return true;
@@ -149,6 +170,7 @@ module.exports = {
   generateCandidates,
   sectionsConflict,
   timeToMinutes,
+  normalizeDayList,
   // exported for tests
   _internal: { eligibleSections },
 };

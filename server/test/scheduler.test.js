@@ -7,6 +7,7 @@ const {
   generateCandidates,
   sectionsConflict,
   timeToMinutes,
+  normalizeDayList,
 } = require('../services/scheduler');
 
 const makeSection = (overrides = {}) => ({
@@ -125,6 +126,31 @@ test('generateCandidates returns [] when a required course is unsatisfiable', ()
     { required_courses: ['CSE 142'], no_before: '10:00' }
   );
   assert.equal(candidates.length, 0);
+});
+
+test('normalizeDayList accepts codes and full names interchangeably', () => {
+  assert.deepEqual([...normalizeDayList(['F', 'Th'])].sort(), ['F', 'Th']);
+  assert.deepEqual(
+    [...normalizeDayList(['Friday', 'thursday'])].sort(),
+    ['F', 'Th']
+  );
+  assert.deepEqual([...normalizeDayList([])], []);
+});
+
+test('generateCandidates respects excluded_days as a hard constraint', () => {
+  const courses = [
+    {
+      code: 'CSE 142',
+      title: 'CP I',
+      sections: [
+        makeSection({ sln: '111', days: ['M', 'W', 'F'] }),   // F excluded -> reject
+        makeSection({ sln: '112', days: ['T', 'Th'] }),       // OK
+      ],
+    },
+  ];
+  const candidates = generateCandidates(courses, { excluded_days: ['Friday'] });
+  assert.equal(candidates.length, 1);
+  assert.equal(candidates[0].sections[0].sln, '112');
 });
 
 test('generateCandidates attaches courseCode/courseTitle to sections', () => {
