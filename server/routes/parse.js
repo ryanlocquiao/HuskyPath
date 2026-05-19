@@ -14,11 +14,8 @@
  *     "constraints": {
  *       "no_before":         "10:00",     // 24h "HH:MM" or null
  *       "no_after":          null,        // 24h "HH:MM" or null
- *       "light_days":        ["Friday"],  // subset of M/T/W/Th/F
- *       "preferred_times":   ["afternoon"], // ["morning","afternoon","evening"]
- *       "avoid_consecutive": true,        // bool
- *       "required_courses":  ["CSE 142"], // explicit course codes
- *       "excluded_courses":  []           // explicit course codes
+ *       "avoid_days":        ["Monday"],  // days to avoid classes
+ *       "avoid_consecutive": true         // bool - no back-to-back classes
  *     },
  *     "raw_text": "<original input>"
  *   }

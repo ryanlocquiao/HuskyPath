@@ -116,11 +116,8 @@ function validateConstraints(payload) {
   return {
     no_before: normalizeTime(payload.no_before),
     no_after: normalizeTime(payload.no_after),
-    light_days: normalizeDayList(payload.light_days),
-    preferred_times: normalizePreferredTimes(payload.preferred_times),
+    avoid_days: normalizeDayList(payload.avoid_days),
     avoid_consecutive: Boolean(payload.avoid_consecutive),
-    required_courses: normalizeStringArray(payload.required_courses),
-    excluded_courses: normalizeStringArray(payload.excluded_courses),
   };
 }
 
@@ -131,37 +128,38 @@ Schema:
 {
   "no_before": "HH:MM or null",
   "no_after": "HH:MM or null",
-  "light_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-  "preferred_times": ["morning", "afternoon", "evening"],
-  "avoid_consecutive": true|false,
-  "required_courses": ["CSE 142"],
-  "excluded_courses": ["MATH 124"]
+  "avoid_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "avoid_consecutive": true|false
 }
 
 Example 1:
-Input: "no classes before 10am, light Friday, avoid back-to-back lectures"
+Input: "no classes before 10am, avoid Mondays, no back to back classes"
 Output:
 {
   "no_before": "10:00",
   "no_after": null,
-  "light_days": ["Friday"],
-  "preferred_times": ["afternoon"],
-  "avoid_consecutive": true,
-  "required_courses": [],
-  "excluded_courses": []
+  "avoid_days": ["Monday"],
+  "avoid_consecutive": true
 }
 
 Example 2:
-Input: "I need Tuesdays and Thursdays only, no classes after 5pm, and exclude CSE 142"
+Input: "no classes after 5pm, avoid Friday"
 Output:
 {
   "no_before": null,
   "no_after": "17:00",
-  "light_days": ["Tuesday", "Thursday"],
-  "preferred_times": [],
-  "avoid_consecutive": false,
-  "required_courses": ["CSE 142"],
-  "excluded_courses": []
+  "avoid_days": ["Friday"],
+  "avoid_consecutive": false
+}
+
+Example 3:
+Input: "not before 9am, not after 3pm, no Wednesdays, no back-to-back lectures"
+Output:
+{
+  "no_before": "09:00",
+  "no_after": "15:00",
+  "avoid_days": ["Wednesday"],
+  "avoid_consecutive": true
 }
 
 Input: "${userText.trim()}"
