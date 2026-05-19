@@ -2,7 +2,7 @@
  * POST /api/parse-constraints
  *
  * Owner: Max
- * Status: STUB — replace with the real Claude API integration.
+ * Status: IMPLEMENTED — Gemini API integration.
  *
  * Contract
  * --------
@@ -14,11 +14,8 @@
  *     "constraints": {
  *       "no_before":         "10:00",     // 24h "HH:MM" or null
  *       "no_after":          null,        // 24h "HH:MM" or null
- *       "light_days":        ["Friday"],  // subset of M/T/W/Th/F
- *       "preferred_times":   ["afternoon"], // ["morning","afternoon","evening"]
- *       "avoid_consecutive": true,        // bool
- *       "required_courses":  ["CSE 142"], // explicit course codes
- *       "excluded_courses":  []           // explicit course codes
+ *       "avoid_days":        ["Monday"],  // days to avoid classes
+ *       "avoid_consecutive": true         // bool - no back-to-back classes
  *     },
  *     "raw_text": "<original input>"
  *   }
@@ -42,30 +39,21 @@
 'use strict';
 
 const express = require('express');
+const { parseConstraints } = require('../services/constraintParser');
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  res.status(501).json({
-    error: 'Not implemented yet',
-    endpoint: 'POST /api/parse-constraints',
-    owner: 'Max',
-    contract: {
-      request: { text: 'string (natural language preferences)' },
-      response: {
-        constraints: {
-          no_before: 'HH:MM or null',
-          no_after: 'HH:MM or null',
-          light_days: 'string[]',
-          preferred_times: 'string[]',
-          avoid_consecutive: 'boolean',
-          required_courses: 'string[]',
-          excluded_courses: 'string[]',
-        },
-        raw_text: 'string',
-      },
-    },
-    receivedBody: req.body,
-  });
+router.post('/', async (req, res) => {
+  const text = req.body?.text;
+  if (!text || typeof text !== 'string') {
+    return res.status(400).json({ error: "Missing 'text' in request body" });
+  }
+
+  try {
+    const constraints = await parseConstraints({ text });
+    return res.json({ constraints, raw_text: text });
+  } catch (err) {
+    return res.status(502).json({ error: 'Gemini API call failed', detail: err.message });
+  }
 });
 
 module.exports = router;
