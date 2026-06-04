@@ -180,7 +180,7 @@ Output:
   "no_after": "17:00",
   "excluded_days": ["Friday"],
   "light_days": ["Friday"],
-  "target_courses": 4"
+  "target_courses": 4
 }
 
 Example 3:
